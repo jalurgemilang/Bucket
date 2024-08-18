@@ -9,12 +9,18 @@ import SwiftUI
 
 @main
 struct BucketApp: App {
-    let persistenceController = PersistenceController.shared
-
+    let coreDataManager = CoreDataManager()
+    @StateObject var cdvm: CoreDataViewModel
+    
+    init() {
+        let viewModel = CoreDataViewModel(manager: coreDataManager)
+        _cdvm = StateObject(wrappedValue: viewModel)
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environmentObject(cdvm)
         }
     }
 }

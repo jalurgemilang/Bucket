@@ -9,78 +9,60 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
-
+    @EnvironmentObject var cdvm: CoreDataViewModel
+    @State var textFieldText: String = ""
+    
     var body: some View {
         NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
+            VStack {
+                TextField("Add bucket here...", text: $textFieldText)
+                    .font(.headline)
+                    .padding(.leading)
+                    .frame(height: 55)
+                    .cornerRadius(10)
+                    .padding(.horizontal)
+                
+                Button(action: {
+                    guard !textFieldText.isEmpty else { return }
+                    cdvm.addBucket(text: textFieldText)
+                    textFieldText = ""
+                    
+                }, label: {
+                    Text("Save")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .frame(height: 55)
+                        .frame(maxWidth: .infinity)
+                        .background(Color.pink)
+                        .cornerRadius(10)
+                    
+                })
+                .padding(.horizontal)
+                
+                List {
+                    ForEach(cdvm.savedEntities) { entity in
+                        HStack {
+                            Text(entity.name ?? "No Name")
+                        }
                     }
+                    .onDelete(perform: cdvm.deleteBucket)
                 }
-                .onDelete(perform: deleteItems)
+                .listStyle(PlainListStyle())
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-            Text("Select an item")
+            .navigationTitle("Buckets")
         }
     }
 
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
 
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
+    
 }
+    
 
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
-
-#Preview {
-    ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+//MARK: PREVIEW
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        let cdvm = CoreDataViewModel(manager: CoreDataManager())
+        ContentView()
+            .environmentObject(cdvm)
+    }
 }

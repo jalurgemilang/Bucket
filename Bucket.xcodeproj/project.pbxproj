@@ -11,8 +11,9 @@
 		9DDAB5882C71B7370053C4B7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDAB5872C71B7370053C4B7 /* ContentView.swift */; };
 		9DDAB58A2C71B7380053C4B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DDAB5892C71B7380053C4B7 /* Assets.xcassets */; };
 		9DDAB58D2C71B7380053C4B7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DDAB58C2C71B7380053C4B7 /* Preview Assets.xcassets */; };
-		9DDAB58F2C71B7380053C4B7 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDAB58E2C71B7380053C4B7 /* Persistence.swift */; };
-		9DDAB5922C71B7380053C4B7 /* Bucket.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9DDAB5902C71B7380053C4B7 /* Bucket.xcdatamodeld */; };
+		9DDAB5922C71B7380053C4B7 /* BucketContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9DDAB5902C71B7380053C4B7 /* BucketContainer.xcdatamodeld */; };
+		9DDAB59A2C71BBBF0053C4B7 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDAB5992C71BBBF0053C4B7 /* CoreDataManager.swift */; };
+		9DDAB59D2C71BDAF0053C4B7 /* CoreDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDAB59C2C71BDAF0053C4B7 /* CoreDataViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,8 +22,9 @@
 		9DDAB5872C71B7370053C4B7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9DDAB5892C71B7380053C4B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9DDAB58C2C71B7380053C4B7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		9DDAB58E2C71B7380053C4B7 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		9DDAB5912C71B7380053C4B7 /* Bucket.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Bucket.xcdatamodel; sourceTree = "<group>"; };
+		9DDAB5992C71BBBF0053C4B7 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		9DDAB59C2C71BDAF0053C4B7 /* CoreDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,11 +57,11 @@
 		9DDAB5842C71B7370053C4B7 /* Bucket */ = {
 			isa = PBXGroup;
 			children = (
+				9DDAB59B2C71BD930053C4B7 /* ViewModel */,
+				9DDAB5982C71BB3E0053C4B7 /* Model */,
 				9DDAB5852C71B7370053C4B7 /* BucketApp.swift */,
 				9DDAB5872C71B7370053C4B7 /* ContentView.swift */,
 				9DDAB5892C71B7380053C4B7 /* Assets.xcassets */,
-				9DDAB58E2C71B7380053C4B7 /* Persistence.swift */,
-				9DDAB5902C71B7380053C4B7 /* Bucket.xcdatamodeld */,
 				9DDAB58B2C71B7380053C4B7 /* Preview Content */,
 			);
 			path = Bucket;
@@ -71,6 +73,23 @@
 				9DDAB58C2C71B7380053C4B7 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		9DDAB5982C71BB3E0053C4B7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9DDAB5902C71B7380053C4B7 /* BucketContainer.xcdatamodeld */,
+				9DDAB5992C71BBBF0053C4B7 /* CoreDataManager.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9DDAB59B2C71BD930053C4B7 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9DDAB59C2C71BDAF0053C4B7 /* CoreDataViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,9 +162,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9DDAB58F2C71B7380053C4B7 /* Persistence.swift in Sources */,
-				9DDAB5922C71B7380053C4B7 /* Bucket.xcdatamodeld in Sources */,
+				9DDAB59D2C71BDAF0053C4B7 /* CoreDataViewModel.swift in Sources */,
+				9DDAB5922C71B7380053C4B7 /* BucketContainer.xcdatamodeld in Sources */,
 				9DDAB5882C71B7370053C4B7 /* ContentView.swift in Sources */,
+				9DDAB59A2C71BBBF0053C4B7 /* CoreDataManager.swift in Sources */,
 				9DDAB5862C71B7370053C4B7 /* BucketApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -354,13 +374,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		9DDAB5902C71B7380053C4B7 /* Bucket.xcdatamodeld */ = {
+		9DDAB5902C71B7380053C4B7 /* BucketContainer.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				9DDAB5912C71B7380053C4B7 /* Bucket.xcdatamodel */,
 			);
 			currentVersion = 9DDAB5912C71B7380053C4B7 /* Bucket.xcdatamodel */;
-			path = Bucket.xcdatamodeld;
+			path = BucketContainer.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
