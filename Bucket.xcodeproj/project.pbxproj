@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D53993B2C71E0AE00F11B2D /* BucketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D53993A2C71E0AE00F11B2D /* BucketView.swift */; };
 		9DDAB5862C71B7370053C4B7 /* BucketApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDAB5852C71B7370053C4B7 /* BucketApp.swift */; };
 		9DDAB5882C71B7370053C4B7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDAB5872C71B7370053C4B7 /* ContentView.swift */; };
 		9DDAB58A2C71B7380053C4B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DDAB5892C71B7380053C4B7 /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9D53993A2C71E0AE00F11B2D /* BucketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketView.swift; sourceTree = "<group>"; };
 		9DDAB5822C71B7370053C4B7 /* Bucket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bucket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DDAB5852C71B7370053C4B7 /* BucketApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketApp.swift; sourceTree = "<group>"; };
 		9DDAB5872C71B7370053C4B7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -38,9 +40,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9D5399392C71E08F00F11B2D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9D53993A2C71E0AE00F11B2D /* BucketView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		9DDAB5792C71B7360053C4B7 = {
 			isa = PBXGroup;
 			children = (
+				9DDAB5852C71B7370053C4B7 /* BucketApp.swift */,
 				9DDAB5842C71B7370053C4B7 /* Bucket */,
 				9DDAB5832C71B7370053C4B7 /* Products */,
 			);
@@ -57,9 +68,9 @@
 		9DDAB5842C71B7370053C4B7 /* Bucket */ = {
 			isa = PBXGroup;
 			children = (
-				9DDAB59B2C71BD930053C4B7 /* ViewModel */,
 				9DDAB5982C71BB3E0053C4B7 /* Model */,
-				9DDAB5852C71B7370053C4B7 /* BucketApp.swift */,
+				9D5399392C71E08F00F11B2D /* View */,
+				9DDAB59B2C71BD930053C4B7 /* ViewModel */,
 				9DDAB5872C71B7370053C4B7 /* ContentView.swift */,
 				9DDAB5892C71B7380053C4B7 /* Assets.xcassets */,
 				9DDAB58B2C71B7380053C4B7 /* Preview Content */,
@@ -166,6 +177,7 @@
 				9DDAB5922C71B7380053C4B7 /* BucketContainer.xcdatamodeld in Sources */,
 				9DDAB5882C71B7370053C4B7 /* ContentView.swift in Sources */,
 				9DDAB59A2C71BBBF0053C4B7 /* CoreDataManager.swift in Sources */,
+				9D53993B2C71E0AE00F11B2D /* BucketView.swift in Sources */,
 				9DDAB5862C71B7370053C4B7 /* BucketApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

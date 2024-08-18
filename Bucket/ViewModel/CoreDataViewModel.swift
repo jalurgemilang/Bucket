@@ -33,8 +33,7 @@ class CoreDataViewModel: ObservableObject {
     
     func fetchBuckets() {
         let request: NSFetchRequest<BucketEntity> = BucketEntity.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: true)]
-        
+        request.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: true)]        
         do {
             savedEntities = try manager.container.viewContext.fetch(request)
         } catch let error {
