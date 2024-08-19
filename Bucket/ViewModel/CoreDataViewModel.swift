@@ -11,8 +11,8 @@ import CoreData
 class CoreDataViewModel: ObservableObject {
     
     let manager: CoreDataManager
-    
-    @Published var savedEntities: [BucketEntity] = []
+    @Published var buckets: [BucketEntity] = []
+    @Published var items:   [ItemEntity] = []
     @Published var isDataLoaded = false
     
     init(manager: CoreDataManager) {
@@ -35,12 +35,37 @@ class CoreDataViewModel: ObservableObject {
         let request: NSFetchRequest<BucketEntity> = BucketEntity.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: true)]        
         do {
-            savedEntities = try manager.container.viewContext.fetch(request)
+            buckets = try manager.container.viewContext.fetch(request)
         } catch let error {
             print("^ Error fetching \(error)")
         }
     }
     
+    func fetchItems() {
+        let request = NSFetchRequest<ItemEntity>(entityName: "ItemEntity")
+        
+        do {
+            items = try manager.container.viewContext.fetch(request)
+        } catch let error {
+            print ("Error fetching \(error.localizedDescription)")
+        }
+    }
+    
+    func fetchItems(forBucket bucket: BucketEntity) {
+        let request = NSFetchRequest<ItemEntity>(entityName: "ItemEntity")
+        //******************************************
+        //**
+        //** NOTE THIS WAY OF FILTERING
+        //** only for 1 to 1 relationship
+        let filter = NSPredicate(format: "bucket == %@", bucket)
+        request.predicate = filter
+        
+        do {
+            items = try manager.container.viewContext.fetch(request)
+        } catch let error {
+            print ("Error fetching \(error.localizedDescription)")
+        }
+    }
     
     func addBucket(text: String) {
         let newBucket = BucketEntity(context: manager.container.viewContext)
@@ -50,22 +75,35 @@ class CoreDataViewModel: ObservableObject {
         savedData()
     }
     
+    func addItem() {
+        let newItem = ItemEntity(context: manager.container.viewContext)
+        newItem.qty = 20
+        newItem.price = 10
+        newItem.status = "buy"
+        
+        newItem.bucket = buckets[2] //One to One relationship, so not NSSet array
+        savedData()
+    }
+    
     func deleteBucket(indexSet: IndexSet) {
         guard let index = indexSet.first else { return }
-        let entity = savedEntities[index]
+        let entity = buckets[index]
         manager.container.viewContext.delete(entity)
         savedData()
     }
     
     
     func savedData() {
+        buckets.removeAll()
+        items.removeAll()
+        
         do {
             try manager.container.viewContext.save()
-            print("^ !!!!!!!!!!!!!!!!!!!!!!!! Sucessful savedData !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+            self.fetchBuckets()
+            self.fetchItems()
+            print("^ !! Sucessful savedData")
         } catch let error {
-            print("^ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
             print("^ !! Error saving data into CoreDataViewModel: \(error)")
-            print("^ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         }
     }
     
